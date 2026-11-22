@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoanWise AI | Loan Approval</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">L</span><span>LoanWise <b>AI</b></span></a>
+    <span class="status"><span class="status-dot"></span> AI assessment</span>
+  </header>
+  <main class="page">
+    <section class="intro">
+      <p class="eyebrow">SMART LOAN ASSESSMENT</p>
+      <h1>Check your loan <span>eligibility.</span></h1>
+      <p class="subheading">Enter the applicant details below to get an AI-generated estimate.</p>
+    </section>
+    <div class="layout">
+      <section class="panel form-panel">
+        <div class="panel-heading"><div><h2>Applicant details</h2><p>All fields are required.</p></div><span class="step-label">8 INPUTS</span></div>
+        <form id="loanForm">
+          <div class="form-grid">
+            <label class="field"><span>Annual income</span><div class="input-wrap"><span class="prefix">₹</span><input id="annual_income" name="annual_income" type="number" min="0" step="any" placeholder="e.g. 600000" required></div><small>Yearly income</small></label>
+            <label class="field"><span>Credit score</span><input id="credit_score" name="credit_score" type="number" min="0" step="1" placeholder="e.g. 700" required><small>Use the range expected by your dataset</small></label>
+            <label class="field"><span>Loan amount</span><div class="input-wrap"><span class="prefix">₹</span><input id="loan_amount" name="loan_amount" type="number" min="0" step="any" placeholder="e.g. 150000" required></div></label>
+            <label class="field"><span>Loan term (months)</span><input id="loan_term_months" name="loan_term_months" type="number" min="1" step="1" placeholder="e.g. 36" required></label>
+            <label class="field"><span>Existing debt</span><div class="input-wrap"><span class="prefix">₹</span><input id="existing_debt" name="existing_debt" type="number" min="0" step="any" placeholder="e.g. 50000" required></div><small>Enter the debt amount on the same time basis as your training data</small></label>
+            <label class="field"><span>Debt-to-income ratio</span><input id="debt_to_income_ratio" name="debt_to_income_ratio" type="number" readonly aria-readonly="true" placeholder="Calculated automatically"><small id="dtiHint">Automatically calculated from existing debt ÷ annual income.</small></label>
+            <label class="field"><span>Employment years</span><input id="employment_years" name="employment_years" type="number" min="0" step="any" placeholder="e.g. 5" required></label>
+            <label class="field"><span>Previous defaults</span><select id="previous_defaults" name="previous_defaults" required><option value="" selected disabled>Select one</option><option value="0">0 — No previous defaults</option><option value="1">1 — One previous default</option><option value="2">2 — Two previous defaults</option><option value="3">3 — Three previous defaults</option></select><small>Choose the value range used in your training dataset</small></label>
+          </div>
+          <div id="formError" class="message error hidden" role="alert"></div>
+          <button id="submitButton" class="primary-button" type="submit"><span class="button-text">Analyze application</span><span class="button-arrow">→</span></button>
+          <p class="privacy-note">Demo estimate only. This tool is not a lending decision.</p>
+        </form>
+      </section>
+      <aside class="panel result-panel" aria-live="polite">
+        <div class="result-icon" id="resultIcon">✦</div><p class="eyebrow">ASSESSMENT RESULT</p>
+        <h2 id="resultTitle">Your result will appear here</h2>
+        <p id="resultDescription" class="result-description">Complete the eight fields to see the model's estimate.</p>
+        <div id="probabilityBlock" class="probability-block hidden">
+          <div class="probability-row"><span>Approval probability</span><strong id="approvalValue">—</strong></div>
+          <div class="meter"><div id="approvalMeter" class="meter-fill"></div></div>
+          <div class="probability-row secondary"><span>Rejection probability</span><strong id="rejectionValue">—</strong></div>
+        </div>
+        <div id="resultMessage" class="message hidden" role="status"></div>
+        <div class="result-footer"><span class="footer-dot"></span><span>Powered by your trained Keras model</span></div>
+      </aside>
+    </div>
+    <p class="disclaimer">Important: predictions depend on training data and model quality. Do not use this demo as the sole basis for real lending decisions.</p>
+  </main>
+  <footer><span>LoanWise AI</span><span>Loan approval prediction demo</span></footer>
+</body>
+</html>
