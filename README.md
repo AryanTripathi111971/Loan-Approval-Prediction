@@ -4,6 +4,8 @@ A full-stack loan approval prediction demo that combines a trained Keras neural 
 
 > **Disclaimer:** This project is an educational demonstration. Its output is a model estimate, not a real lending decision or financial advice.
 
+> **Setup status:** `models/scaler.pkl` is in this repository. The supplied ZIP also contains `models/loan_model.keras`, but that binary model file has not yet been uploaded here. Add it to the `models/` folder before running `app.py` or `test_models.py`.
+
 ## Overview
 
 LoanWise AI collects eight applicant attributes and sends them to a Flask prediction endpoint. The backend validates the input, calculates the debt-to-income ratio, applies the saved feature scaler, and passes the transformed data to the trained neural network.
