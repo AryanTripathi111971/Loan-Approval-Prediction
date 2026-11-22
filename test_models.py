@@ -7,7 +7,6 @@ from tensorflow.keras.models import load_model
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_DIR = BASE_DIR / "models"
-
 MODEL_PATH = MODEL_DIR / "loan_model.keras"
 SCALER_PATH = MODEL_DIR / "scaler.pkl"
 
@@ -28,7 +27,6 @@ def main():
 
     if not MODEL_PATH.exists():
         raise FileNotFoundError(f"Missing model: {MODEL_PATH}")
-
     if not SCALER_PATH.exists():
         raise FileNotFoundError(f"Missing scaler: {SCALER_PATH}")
 
@@ -37,14 +35,12 @@ def main():
 
     with open(SCALER_PATH, "rb") as file:
         scaler = pickle.load(file)
-
     print("SUCCESS: Scaler loaded.")
 
     sample = pd.DataFrame(
-        [[60000, 700, 15000, 36, 5000, 0.25, 5, 0]],
-        columns=FEATURES
+        [[60000, 700, 15000, 36, 5000, 5000 / 60000, 5, 0]],
+        columns=FEATURES,
     )
-
     scaled_sample = scaler.transform(sample)
     prediction = model.predict(scaled_sample, verbose=0)
     probability = float(np.asarray(prediction).reshape(-1)[0])
